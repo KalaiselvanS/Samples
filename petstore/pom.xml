@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.it.swager.petstore</groupId>
+  <artifactId>petstore</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>petstore Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  
+  <properties>
+	<default.package>com.it.petstore</default.package>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>petstore</finalName>
+    <plugins>
+	  <!--<plugin>
+	    <groupId>io.swagger</groupId>
+	    <artifactId>swagger-codegen-maven-plugin</artifactId>
+	    <version>2.2.3</version>
+	    <executions>
+	        <execution>
+	            <goals>
+	                <goal>generate</goal>
+	            </goals>
+	            <configuration>
+	                <inputSpec>${project.basedir}/src/main/resources/swagger.json</inputSpec>
+	                <language>java</language>
+	                <library>resttemplate</library>
+	            </configuration>
+	        </execution>
+	    </executions>
+	  </plugin>-->
+	  <plugin>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-codegen-maven-plugin</artifactId>
+            <version>2.2.3</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                        <inputSpec>${project.basedir}/src/main/resources/swagger.json</inputSpec>
+                        <language>spring</language>
+                       <basePackage>${default.package}</basePackage>
+                        <modelPackage>${default.package}.model</modelPackage>
+                        <apiPackage>${default.package}.api</apiPackage>
+                        <invokerPackage>${default.package}.invoker</invokerPackage>
+                        <configOptions>
+                            <interfaceOnly>true</interfaceOnly>
+                            <dateLibrary>java8</dateLibrary>
+                            <java8>true</java8>
+                            <library>spring-boot</library>
+                            <serializableModel>true</serializableModel>
+                            <sourceFolder>src/main/java</sourceFolder>                              
+                        </configOptions>
+                    </configuration>
+                </execution>
+            </executions>
+	  </plugin>
+	  
+<!--			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>swagger-ui</id>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>
+								https://github.com/swagger-api/swagger-ui/archive/master.tar.gz</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								target/${project.artifactId}-${project.version}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>
+										${project.build.directory}/swagger-ui-master/dist</directory>
+									<filtering>true</filtering>
+									<excludes>
+										<exclude>index.html</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> -->
+	</plugins>
+  </build>
+  
+
+</project>
